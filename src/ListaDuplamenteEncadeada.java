@@ -99,7 +99,7 @@ public class ListaDuplamenteEncadeada<T> {
     }
 
     public int getSize() {
-        return getSize();
+        return size;
     }
 
     public void set(int posicao, T valor) {
