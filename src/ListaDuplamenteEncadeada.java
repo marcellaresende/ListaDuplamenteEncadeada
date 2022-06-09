@@ -43,14 +43,6 @@ public class ListaDuplamenteEncadeada<T> {
             throw new IndexOutOfBoundsException("Não há essa posição :(");
         }
 
-//        Node<T> noAtual = base;
-//        for (int i = 0; i < index; i++) {
-//            if(i == index) {
-//                removeNode(noAtual);
-//                return noAtual.dado;
-//            }
-//            noAtual = noAtual.proximo;
-//        }
         var node = getNode(index);
         removeNode(node);
 
@@ -76,6 +68,7 @@ public class ListaDuplamenteEncadeada<T> {
 
         node.anterior = null;
         node.proximo = null;
+        size--;
         return dado;
     }
 
@@ -108,6 +101,7 @@ public class ListaDuplamenteEncadeada<T> {
     }
 
     public int getSize() {
+        System.out.println("O tamanho da lista é: ");
         return size;
     }
 
@@ -136,5 +130,4 @@ public class ListaDuplamenteEncadeada<T> {
         System.out.println(" ");
 
     }
-
 }

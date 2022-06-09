@@ -14,9 +14,5 @@ public class Main {
         listaDE.removeIndex(4);
         listaDE.display();
         listaDE.getSize();
-
-
-
-
     }
 }
