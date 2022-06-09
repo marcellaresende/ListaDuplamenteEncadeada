@@ -4,9 +4,9 @@ public class ListaDuplamenteEncadeada<T> {
     private int size;
 
     public void adicionaFim(T valor) {
-        var node = new Node (valor);
+        var node = new Node(valor);
         node.dado = valor;
-        if(estaVazio()) {
+        if (estaVazio()) {
             base = node;
         } else {
             node.anterior = top;
@@ -38,9 +38,10 @@ public class ListaDuplamenteEncadeada<T> {
     }
 
 
-
     public T removeIndex(int index) {
-        if (index < 0 || index > size) { throw new IndexOutOfBoundsException("Não há essa posição :(");}
+        if (index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Não há essa posição :(");
+        }
 
 //        Node<T> noAtual = base;
 //        for (int i = 0; i < index; i++) {
@@ -51,19 +52,19 @@ public class ListaDuplamenteEncadeada<T> {
 //            noAtual = noAtual.proximo;
 //        }
         var node = getNode(index);
-        removeNode(node) ;
+        removeNode(node);
 
         return node.dado;
     }
 
-    private T removeNode(Node<T> node){
+    private T removeNode(Node<T> node) {
         T dado = node.dado;
         var proximo = node.proximo;
         var anterior = node.anterior;
 
-        if(node == base) {
+        if (node == base) {
             base = base.proximo;
-            if(base != null) {
+            if (base != null) {
                 base = null;
             }
         } else if (node.proximo == null) {
@@ -86,7 +87,7 @@ public class ListaDuplamenteEncadeada<T> {
 
         if (meioLista >= index) {
             Node<T> noAtual = top;
-            for (int i = size -1; i != index; i--) {
+            for (int i = size - 1; i != index; i--) {
                 noAtual = noAtual.anterior;
             }
             return noAtual;
@@ -98,7 +99,7 @@ public class ListaDuplamenteEncadeada<T> {
         return noAtual;
     }
 
-    public boolean estaVazio(){
+    public boolean estaVazio() {
         return this.base == null && this.top == null; //se base e top apontam para null a lista está vazia
     }
 
@@ -119,14 +120,21 @@ public class ListaDuplamenteEncadeada<T> {
     }
 
 
-    @Override
-    public String toString() {
-        String string = "Lista: ";
-
-        for(Node<T> node = base; node != null; node = node.proximo) {
-            string += node.dado + " ";
+    public void display() {
+        //Começa pela base
+        Node current = base;
+        if (base == null) {
+            System.out.println("Lista vazia");
+            return;
         }
-        return string;
-    }
-}
+        System.out.println("Nos da lista encadeada: ");
+        System.out.print(current.dado + " ");
+        while (current.proximo != null) {
+            System.out.print(current.proximo.dado + " ");
+            current = current.proximo;
+        }
+        System.out.println(" ");
 
+    }
+
+}
