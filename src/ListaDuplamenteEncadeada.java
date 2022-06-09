@@ -4,8 +4,11 @@ public class ListaDuplamenteEncadeada<T> {
     private int size;
 
     public void adicionaFim(T valor) {
-        var node = new Node<T>(valor);
-        if(!estaVazio()) {
+        var node = new Node (valor);
+        node.dado = valor;
+        if(estaVazio()) {
+            base = node;
+        } else {
             node.anterior = top;
             top.proximo = node;
         }
@@ -39,15 +42,18 @@ public class ListaDuplamenteEncadeada<T> {
     public T removeIndex(int index) {
         if (index < 0 || index > size) { throw new IndexOutOfBoundsException("Não há essa posição :(");}
 
-        Node<T> noAtual = base;
-        for (int i = 0; i < index; i++) {
-            if(i == index) {
-                removeNode(noAtual);
-                return noAtual.dado;
-            }
-            noAtual = noAtual.proximo;
-        }
-        return null;
+//        Node<T> noAtual = base;
+//        for (int i = 0; i < index; i++) {
+//            if(i == index) {
+//                removeNode(noAtual);
+//                return noAtual.dado;
+//            }
+//            noAtual = noAtual.proximo;
+//        }
+        var node = getNode(index);
+        removeNode(node) ;
+
+        return node.dado;
     }
 
     private T removeNode(Node<T> node){
@@ -61,10 +67,10 @@ public class ListaDuplamenteEncadeada<T> {
                 base = null;
             }
         } else if (node.proximo == null) {
-            node.anterior = null;
+            anterior.proximo = null;
         } else {
-            node.proximo = anterior;
-            node.anterior = proximo;
+            proximo.anterior = anterior;
+            anterior.proximo = proximo;
         }
 
         node.anterior = null;
@@ -77,13 +83,15 @@ public class ListaDuplamenteEncadeada<T> {
             throw new IndexOutOfBoundsException("Não há essa posição :(");
         }
         int meioLista = size / 2;
+
         if (meioLista >= index) {
             Node<T> noAtual = top;
-            for (int i = 0; i < index; i++) {
+            for (int i = size -1; i != index; i--) {
                 noAtual = noAtual.anterior;
             }
+            return noAtual;
         }
-        Node<T> noAtual = noAtual = base;
+        Node<T> noAtual = base;
         for (int i = 0; i < index; i++) {
             noAtual = noAtual.proximo;
         }
@@ -115,9 +123,10 @@ public class ListaDuplamenteEncadeada<T> {
     public String toString() {
         String string = "Lista: ";
 
-        for(Node<T> node = top; node != null; node = node.proximo) {
+        for(Node<T> node = base; node != null; node = node.proximo) {
             string += node.dado + " ";
         }
         return string;
     }
 }
+
