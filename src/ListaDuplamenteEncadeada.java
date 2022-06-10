@@ -101,7 +101,7 @@ public class ListaDuplamenteEncadeada<T> {
     }
 
     public int getSize() {
-        System.out.println("O tamanho da lista é: ");
+        System.out.println("O tamanho da lista eh: " + size);
         return size;
     }
 
